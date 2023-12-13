@@ -7,7 +7,10 @@ const instance = axios.create({
 })
 
 export const ArticleAPI = {
-  getArticles() {
-    return instance.get('/articles')
+  getArticles(offset) {
+    return instance.get(`/articles?limit=5&offset=${offset}`)
+  },
+  getArticle(slug) {
+    return instance.get(`/articles/${slug}`)
   },
 }
