@@ -14,3 +14,23 @@ export const ArticleAPI = {
     return instance.get(`/articles/${slug}`)
   },
 }
+
+export const UserAPI = {
+  registration(username, email, password) {
+    return instance.post('/users', {
+      user: {
+        username,
+        email,
+        password,
+      },
+    })
+  },
+  login(email, password) {
+    return instance.post('/users/login', {
+      user: {
+        email,
+        password,
+      },
+    })
+  },
+}
