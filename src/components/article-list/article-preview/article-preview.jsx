@@ -4,11 +4,9 @@ import { memo, useState } from 'react'
 
 import s from './article-preview.module.scss'
 const ArticlePreview = ({ data }) => {
-  // const { title, likes, description, author, date, favorited, tagList, slug, preview } = data
   const { title, description, author, date, tagList, slug } = data
 
   const formatedDate = format(new Date(date), 'MMMM	d, Y')
-  // const formatedDate = date instanceof Date ? format(new Date(date), 'MMMM d, Y') : ''
 
   const [image, setImage] = useState(data.author?.image)
 

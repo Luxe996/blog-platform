@@ -6,6 +6,21 @@ const instance = axios.create({
   baseURL,
 })
 
+const urlsSkipAuth = ['/users', '/users/login', '/articles']
+
+instance.interceptors.request.use(async (config) => {
+  const accessToken = localStorage.getItem('token')
+
+  if (config.url && urlsSkipAuth.includes(config.url)) {
+    return config
+  }
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`
+  }
+
+  return config
+})
+
 export const ArticleAPI = {
   getArticles(offset) {
     return instance.get(`/articles?limit=5&offset=${offset}`)
@@ -32,5 +47,16 @@ export const UserAPI = {
         password,
       },
     })
+  },
+  getImage(username) {
+    return instance.get(`/profiles/${username}`)
+  },
+  editProfile(data) {
+    return instance.put('/user', {
+      user: data,
+    })
+  },
+  relog() {
+    return instance.get('/user')
   },
 }

@@ -36,7 +36,6 @@ const ArticleList = () => {
       }
       return (
         <li key={slug} className={s.item}>
-          {/*<ArticlePreview data={data} header={false} />*/}
           <ArticlePreview data={data} />
         </li>
       )
