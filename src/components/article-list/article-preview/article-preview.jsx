@@ -43,7 +43,7 @@ const ArticlePreview = ({ data }) => {
           <h5 className={s.title}>
             <Link to={`/articles/${slug}`}>{title}</Link>
           </h5>
-          <LikeButton favorited={favorited} slug={slug} likes={likes} />
+          <LikeButton favorited={favorited} slug={slug} likes={likes} token={user.token} />
         </div>
         <ul className={`${s['tag-list']} ${s['tag-list--article']}`}>{tags}</ul>
         <p className={s.text}>{description}</p>

@@ -6,9 +6,8 @@ import { dislikeArticleTC, likeArticleTC } from '../../store/article-reducer'
 
 import s from './like-button.module.scss'
 
-const LikeButton = ({ favorited, slug, likes }) => {
+const LikeButton = ({ favorited, slug, likes, token }) => {
   const location = useLocation()
-  console.log(location.pathname)
   const dispatch = useDispatch()
   const req = location.pathname === '/' ? 'all' : 'one'
   const clickButton = () => {
@@ -19,6 +18,7 @@ const LikeButton = ({ favorited, slug, likes }) => {
       <button
         className={`${s.likes}  ${favorited ? s['likes--checked'] : s['likes--unchecked']}`}
         onClick={() => clickButton()}
+        disabled={!token}
       />
       <span className={s['likes-text']}>{likes}</span>
     </>

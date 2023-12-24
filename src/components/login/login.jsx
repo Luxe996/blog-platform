@@ -27,7 +27,7 @@ const Login = () => {
   }
 
   useEffect(() => {
-    user.username && navigate('/articles')
+    user.username && navigate('/')
   }, [user])
 
   return (

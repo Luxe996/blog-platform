@@ -98,7 +98,6 @@ export const DeleteArticleTC = (slug) => async (dispatch) => {
 }
 
 export const likeArticleTC = (slug, req) => async (dispatch) => {
-  console.log('1')
   dispatch(SetLoadingAC(false))
   await ArticleAPI.likeArticle(slug).then((res) => {
     if (req === 'one') {
