@@ -1,0 +1,26 @@
+.likes {
+  border: none;
+  width: 16px;
+  height: 15px;
+  cursor: pointer;
+  background-color: inherit;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 5px;
+
+  &--unchecked {
+    background-image: url('./img/heart-empty.svg');
+  }
+
+  &--unchecked:hover {
+    background-image: url('./img/heart-red.svg');
+  }
+
+  &--checked {
+    background-image: url('./img/heart-red.svg');
+  }
+
+  &--checked:hover {
+    background-image: url('./img/heart-empty.svg');
+  }
+}

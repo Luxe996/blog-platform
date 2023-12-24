@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Pagination, PaginationItem } from '@mui/material'
 import { Link, useLocation } from 'react-router-dom'
 
-import { SetArticlesTC } from '../../store/article-reducer'
+import { SetArticlesTC, SetLikesAC } from '../../store/article-reducer'
 
 import s from './article-list.module.scss'
 import ArticlePreview from './article-preview/article-preview'
@@ -11,7 +11,7 @@ const ArticleList = () => {
   const location = useLocation()
   const dispatch = useDispatch()
 
-  const { articles, loaded } = useSelector((state) => state.article)
+  const { articles, loaded, liked } = useSelector((state) => state.article)
   const [pages, setPages] = useState(parseInt(location.search?.split('=')[1] || '1'))
 
   useEffect(() => {
@@ -20,6 +20,13 @@ const ArticleList = () => {
     }
     dispatch(SetArticlesTC((pages - 1) * 5))
   }, [pages])
+
+  useEffect(() => {
+    if (liked) {
+      dispatch(SetArticlesTC((pages - 1) * 5))
+      dispatch(SetLikesAC(false))
+    }
+  }, [liked])
 
   const items = articles.map(
     ({ slug, title, description, updatedAt: date, tagList, favorited, favoritesCount: likes, author }) => {

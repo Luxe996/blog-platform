@@ -4,10 +4,11 @@ import { memo, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import AcceptModal from '../../../utils/accept-modal/accept-modal'
+import LikeButton from '../../../utils/like/like-button'
 
 import s from './article-preview.module.scss'
 const ArticlePreview = ({ data }) => {
-  const { title, description, author, date, tagList, slug, preview } = data
+  const { title, description, author, date, tagList, slug, preview, favorited, likes } = data
   const { user } = useSelector((state) => state.user)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -42,7 +43,7 @@ const ArticlePreview = ({ data }) => {
           <h5 className={s.title}>
             <Link to={`/articles/${slug}`}>{title}</Link>
           </h5>
-          {/*    likebtn*/}
+          <LikeButton favorited={favorited} slug={slug} likes={likes} />
         </div>
         <ul className={`${s['tag-list']} ${s['tag-list--article']}`}>{tags}</ul>
         <p className={s.text}>{description}</p>

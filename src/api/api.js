@@ -42,6 +42,12 @@ export const ArticleAPI = {
   deleteArticle(slug) {
     return instance.delete(`/articles/${slug}`)
   },
+  likeArticle(slug) {
+    return instance.post(`/articles/${slug}/favorite`)
+  },
+  dislikeArticle(slug) {
+    return instance.delete(`/articles/${slug}/favorite`)
+  },
 }
 
 export const UserAPI = {
