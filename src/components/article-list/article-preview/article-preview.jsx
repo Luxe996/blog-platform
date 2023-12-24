@@ -1,10 +1,15 @@
 import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
 import { memo, useState } from 'react'
+import { useSelector } from 'react-redux'
+
+import AcceptModal from '../../../utils/accept-modal/accept-modal'
 
 import s from './article-preview.module.scss'
 const ArticlePreview = ({ data }) => {
-  const { title, description, author, date, tagList, slug } = data
+  const { title, description, author, date, tagList, slug, preview } = data
+  const { user } = useSelector((state) => state.user)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const formatedDate = format(new Date(date), 'MMMM	d, Y')
 
@@ -17,6 +22,18 @@ const ArticlePreview = ({ data }) => {
       </li>
     )
   })
+
+  const buttons = (
+    <div className={s.buttons}>
+      <button className={`${s.btn} ${s['btn--delete']}`} onClick={() => setIsModalOpen(true)}>
+        Delete
+      </button>
+      {isModalOpen && <AcceptModal setOpen={setIsModalOpen} slug={slug} />}
+      <Link className={`${s.btn} ${s['btn--edit']}`} to={`/articles/${slug}/edit`}>
+        Edit
+      </Link>
+    </div>
+  )
 
   return (
     <>
@@ -45,7 +62,7 @@ const ArticlePreview = ({ data }) => {
             }}
           />
         </div>
-        {/*    user*/}
+        {user.username === author.username && !preview && buttons}
       </div>
     </>
   )

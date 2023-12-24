@@ -6,7 +6,8 @@ const instance = axios.create({
   baseURL,
 })
 
-const urlsSkipAuth = ['/users', '/users/login', '/articles']
+// const urlsSkipAuth = ['/users', '/users/login', '/articles']
+const urlsSkipAuth = ['/users', '/users/login']
 
 instance.interceptors.request.use(async (config) => {
   const accessToken = localStorage.getItem('token')
@@ -27,6 +28,19 @@ export const ArticleAPI = {
   },
   getArticle(slug) {
     return instance.get(`/articles/${slug}`)
+  },
+  createArticle(data) {
+    return instance.post('/articles', {
+      article: data,
+    })
+  },
+  editArticle(slug, data) {
+    return instance.put(`/articles/${slug}`, {
+      article: data,
+    })
+  },
+  deleteArticle(slug) {
+    return instance.delete(`/articles/${slug}`)
   },
 }
 
