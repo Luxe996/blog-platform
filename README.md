@@ -1,2 +1,1 @@
-# blog-platform
-blog-platform
+https://blog-platform-nu.vercel.app/
